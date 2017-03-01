@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import { DS } from './DataStore.js'
-
-function Task (props) {
-  return (
-    <div>{props.task.desc}</div>
-  )
-}
+import Task from './Task.js'
 
 class Tasks extends Component {
   componentWillMount () {
@@ -18,7 +13,7 @@ class Tasks extends Component {
   render () {
     return (
       <div>
-        { this.state.taskList.map((task, index) => <Task key={index} task={task} />) }
+        { this.state.taskList.map((task) => <Task key={task.id} task={task} />) }
       </div>
     )
   }
