@@ -1,11 +1,24 @@
 import React, { Component } from 'react'
-import Task from './Task.js'
+import { DS } from './DataStore.js'
+
+function Task (props) {
+  return (
+    <div>{props.task.desc}</div>
+  )
+}
 
 class Tasks extends Component {
+  componentWillMount () {
+    DS.observe('todo-list', (todos) => {
+      this.setState({
+        taskList: todos
+      })
+    })
+  }
   render () {
     return (
       <div>
-        { this.props.taskList.map((task) => <Task {...task} />) }
+        { this.state.taskList.map((task, index) => <Task key={index} task={task} />) }
       </div>
     )
   }
